@@ -16,10 +16,9 @@ function textons = createTextons(imStack, bank, k)
   npixel = h * w * n;
   R = reshape(R, [npixel d]);
   
-  % Cluster features via k-means.
-  c = R(randi(npixel, k, 1));
-  
-  textons = zeros(k, d);
-  
-  
+  % k-means clustering of features.
+  % Sample a subset, in order to reduce complexity.
+  samplesize = int32(npixel * 0.5);
+  S = R(randperm(npixel, samplesize));
+  textons = kmeans(S, k);
 return

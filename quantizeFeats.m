@@ -16,4 +16,4 @@ function labelIm = quantizeFeats(featIm, meanFeats)
       labelIm(i, j) = row;
     end
   end
-end
+return
