@@ -1,4 +1,4 @@
-function featIm = extractTextonHists(origIm, bank, textons, winSize)
+function [featIm] = extractTextonHists(origIm, bank, textons, winSize)
 % Given a grayscale image, filter bank, and texton codebook, construct a texton 
 % histogram for each pixel based on the frequency of each texton within its 
 % neighborhood (as defined by a local window of fixed scale winSize).

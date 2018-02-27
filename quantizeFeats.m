@@ -1,4 +1,4 @@
-function labelIm = quantizeFeats(featIm, meanFeats)
+function [labelIm] = quantizeFeats(featIm, meanFeats)
 % Given an (h, w, d) matrix featIm, where h and w are the height and width of 
 % the original image and d denotes the dimensionality of the feature vector 
 % already computed for each of its pixels, and given a (k, d) matrix meanFeats

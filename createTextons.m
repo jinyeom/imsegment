@@ -1,4 +1,4 @@
-function textons = createTextons(imStack, bank, k)
+function [textons] = createTextons(imStack, bank, k)
 % Given a cell array imStack of length n containing a series of n grayscale 
 % images and a filter bank, compute a texton "codebook" (i.e., set of quantized 
 % filter bank responses) based on a sample of filter responses from all n 
@@ -20,5 +20,6 @@ function textons = createTextons(imStack, bank, k)
   % Sample a subset, in order to reduce complexity.
   samplesize = int32(npixel * 0.5);
   S = R(randperm(npixel, samplesize));
-  textons = kmeans(S, k);
+  [idx, T] = kmeans(S, k);
+  textons = T;
 return

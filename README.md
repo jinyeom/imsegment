@@ -1,2 +1,2 @@
-# k-means
-Octave implementation of k-means segmentation
+# imsegment
+Octave implementation of k-means image segmentation
