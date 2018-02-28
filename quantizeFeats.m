@@ -11,7 +11,7 @@ function [labelIm] = quantizeFeats(featIm, meanFeats)
   labelIm = zeros(h, w);
   for i = 1:h
     for j = 1:w
-      dists = dist2(meanFeats, featIm(i, j));
+      dists = dist2(meanFeats, featIm(i, j, :));
       minval, row = min(dists);
       labelIm(i, j) = row;
     end

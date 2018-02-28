@@ -10,7 +10,7 @@ L = imread("images/car.jpg");
 % Parameters to be tuned.
 k = 10;
 winSize = 5;
-numColorRegions = 10;
+numColorRegions = 4;
 numTextureRegions = 10;
 
 % Filter bank
