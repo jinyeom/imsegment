@@ -9,9 +9,12 @@ function [textons] = createTextons(imStack, bank, k)
   % Create a stack of filter responses.
   % Each pixel in each of n images has a feature vector of size d.
   R = zeros(h, w, n, d);
-  for i = 1:d
-    F = bank(:, :, i);
-    R(:, :, :, i) = imfilter(imStack, F);
+  for i = 1:n
+    I = imStack(:, :, i);
+    for j = 1:d
+      F = bank(:, :, j);
+      R(:, :, i, j) = imfilter(I, F);
+    end
   end
   npixel = h * w * n;
   R = reshape(R, [npixel d]);
@@ -19,7 +22,7 @@ function [textons] = createTextons(imStack, bank, k)
   % k-means clustering of features.
   % Sample a subset, in order to reduce complexity.
   samplesize = int32(npixel * 0.5);
-  S = R(randperm(npixel, samplesize));
-  [idx, T] = kmeans(S, k);
-  textons = T;
+  S = R(randperm(npixel, samplesize), :); 
+  [idx, C] = kmeans(S, k);
+  textons = C;
 return

@@ -1,6 +1,5 @@
-function [colorLabelIm textureLabelIm] = 
-  compareSegmentations(origIm, bank, textons, winSize, 
-  numColorRegions, numTextureRegions)
+function [colorLabelIm textureLabelIm] = compareSegmentations(origIm, bank, 
+  textons, winSize, numColorRegions, numTextureRegions)
 % Given an (h, w, 3) RGB color image origIm, compute two segmentations: one 
 % based on color features and one based on texture features. The color 
 % segmentation should be based on k-means clustering of the colors appearing in
@@ -15,6 +14,6 @@ function [colorLabelIm textureLabelIm] =
   colorLabelIm = reshape(idx, [h w]);
   
   % Texture segmentation:
-  featIm = extractTextonHists(origIm);
-  
+  featIm = extractTextonHists(rgb2gray(origIm), bank, textons, winSize);
+  textureLabelIm = quantizeFeats(featIm, textons);
 return
