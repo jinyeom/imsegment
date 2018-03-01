@@ -4,6 +4,13 @@ function [labelIm] = quantizeFeats(featIm, meanFeats)
 % already computed for each of its pixels, and given a (k, d) matrix meanFeats
 % of k cluster centers, each of which is a d-dimensional vector (a row in the 
 % matrix), map each pixel in the input image to its appropriate k-means center.
+  disp(size(featIm, 3))
+  disp(size(meanFeats, 2))
+  
+  if size(featIm , 3) != size(meanFeats, 2)
+    error('featIm and meanFeats must have the same feature length.')
+  end
+
   [h, w, d] = size(featIm);
   [k, d] = size(meanFeats);
   
@@ -11,8 +18,9 @@ function [labelIm] = quantizeFeats(featIm, meanFeats)
   labelIm = zeros(h, w);
   for i = 1:h
     for j = 1:w
-      dists = dist2(meanFeats, featIm(i, j, :));
-      minval, row = min(dists);
+      F = reshape(featIm(i, j, :), [1 d]);
+      dists = dist2(meanFeats, F);
+      [minval, row] = min(dists);
       labelIm(i, j) = row;
     end
   end
