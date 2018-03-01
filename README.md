@@ -1,2 +1,2 @@
 # imsegment
-Octave implementation of k-means image segmentation
+MATLAB implementation of k-means image segmentation
