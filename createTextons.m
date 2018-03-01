@@ -11,13 +11,8 @@ function [textons] = createTextons(imStack, bank, k)
   R = zeros(h, w, n, d);
   for i = 1:n
     I = imStack(:, :, i);
-    %for j = 1:d
-    %  F = bank(:, :, j);
-    %  R(:, :, i, j) = imfilter(I, F);
-    %end
-    R(:, :, i, :) = imfilter(I, bank);
+    R(:, :, i) = imfilter(I, bank);
   end
-  %R = convn(imStack, bank, 'valid');
   npixel = h * w * n;
   R = reshape(R, [npixel d]);
   

@@ -2,16 +2,16 @@
 % Author: Jin Yeom (jinyeom@utexas.edu)
 
 % Test images.
-I = imread('images/gumballs.jpg');
-J = imread('images/twins.jpg');
-K = imread('images/snake.jpg');
-L = imread('images/car.jpg');
+I = im2double(imread('images/gumballs.jpg'));
+J = im2double(imread('images/twins.jpg'));
+K = im2double(imread('images/snake.jpg'));
+L = im2double(imread('images/car.jpg'));
 
 % Parameters to be tuned.
-k = 10;
-winSize = 5;
-numColorRegions = 4;
-numTextureRegions = 10;
+k = 5;
+winSize = 21;
+numColorRegions = 5;
+numTextureRegions = 5;
 
 % Load the filter bank.
 load('data/filterBank.mat', 'F');
@@ -40,9 +40,9 @@ close
 T = createTextons(S, F, k);
 fprintf('textons dimensions: (%s)\n', num2str(size(T)))
 
-[colorLabelIm, textureLabelIm] = compareSegmentations(I, F, T, winSize, 
+[colorLabelIm, textureLabelIm] = compareSegmentations(K, F, T, winSize, ...
   numColorRegions, numTextureRegions);
   
-#imagesc(colorLabelIm); pause
+imagesc(colorLabelIm); pause
 imagesc(textureLabelIm); pause
 close

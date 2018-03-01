@@ -2,7 +2,7 @@ function [featIm] = extractTextonHists(origIm, bank, textons, winSize)
 % Given a grayscale image, filter bank, and texton codebook, construct a texton 
 % histogram for each pixel based on the frequency of each texton within its 
 % neighborhood (as defined by a local window of fixed scale winSize).
-  if size(bank, 3) != size(textons, 2)
+  if size(bank, 3) ~= size(textons, 2)
     error('Filter bank must have the same number of filters as the length', ... 
           'of features in textons.')
   end
@@ -26,7 +26,7 @@ function [featIm] = extractTextonHists(origIm, bank, textons, winSize)
     for j = 1:w
       winc = max([1 j - r]):min([j + r w]);
       W = L(winr, winc); % window of labels (1 to k)
-      W = reshape(W, [size(winr, 2) * size(winc, 2) 1]);
+      W = reshape(W, size(winr, 2) * size(winc, 2), 1);
       featIm(i, j, :) = hist(W, k);
     end
   end
