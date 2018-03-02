@@ -18,7 +18,7 @@ function [textons] = createTextons(imStack, bank, k)
   
   % k-means clustering of features.
   % Sample a subset, in order to reduce complexity.
-  samplesize = int32(npixel * 0.5);
+  samplesize = int32(npixel * 0.7);
   S = R(randperm(npixel, samplesize), :); 
   [idx, C] = kmeans(S, k);
   textons = C;

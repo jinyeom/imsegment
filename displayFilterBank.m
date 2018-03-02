@@ -14,4 +14,4 @@ function displayFilterBank(F)
     subplot(gridSize, gridSize, i);
     imagesc(F(:,:,i));
   end
-  saveas(figure, 'images/filters.png')
+  print('images/filters.png', '-dpng', '-r0')
