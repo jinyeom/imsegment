@@ -9,7 +9,7 @@ function displayFilterBank(F)
   
   gridSize = ceil(sqrt(numFilters));
  
-  figure
+  figure;
   for i = 1:numFilters
     subplot(gridSize, gridSize, i);
     imagesc(F(:,:,i));
