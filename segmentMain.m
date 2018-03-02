@@ -9,14 +9,15 @@ L = im2double(imread('images/car.jpg'));
 
 % Parameters to be tuned.
 k = 5;
-winSize = 21;
-numColorRegions = 5;
-numTextureRegions = 5;
+winSize = 65;
+numColorRegions = 10;
+numTextureRegions = 10;
 
 % Load the filter bank.
 load('data/filterBank.mat', 'F');
 fprintf('filterBank dimensions: (%s)\n', num2str(size(F)))
-displayFilterBank(F); pause
+figure; displayFilterBank(F); pause
+saveas(figure, 'images/filters.png')
 close
 
 % Create a stack of images for creating textons.
@@ -40,9 +41,27 @@ close
 T = createTextons(S, F, k);
 fprintf('textons dimensions: (%s)\n', num2str(size(T)))
 
-[colorLabelIm, textureLabelIm] = compareSegmentations(K, F, T, winSize, ...
-  numColorRegions, numTextureRegions);
-  
+% Now for the experiments...
+[colorLabelIm, textureLabelIm] = ...
+  compareSegmentations(I, F, T, winSize, numColorRegions, numTextureRegions);
+imagesc(colorLabelIm); pause
+imagesc(textureLabelIm); pause
+close
+
+[colorLabelIm, textureLabelIm] = ...
+  compareSegmentations(J, F, T, winSize, numColorRegions, numTextureRegions);
+imagesc(colorLabelIm); pause
+imagesc(textureLabelIm); pause
+close
+
+[colorLabelIm, textureLabelIm] = ...
+  compareSegmentations(K, F, T, winSize, numColorRegions, numTextureRegions);
+imagesc(colorLabelIm); pause
+imagesc(textureLabelIm); pause
+close
+
+[colorLabelIm, textureLabelIm] = ...
+  compareSegmentations(L, F, T, winSize, numColorRegions, numTextureRegions);
 imagesc(colorLabelIm); pause
 imagesc(textureLabelIm); pause
 close
