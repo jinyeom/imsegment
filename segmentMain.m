@@ -16,9 +16,8 @@ numTextureRegions = 10;
 % Load the filter bank.
 load('data/filterBank.mat', 'F');
 fprintf('filterBank dimensions: (%s)\n', num2str(size(F)))
-figure; displayFilterBank(F); pause
-saveas(figure, 'images/filters.png')
-close
+displayFilterBank(F)
+pause; close
 
 % Create a stack of images for creating textons.
 % This image stack consists of the test images above in grayscale, with the
@@ -28,10 +27,17 @@ S = imstack(S, J);
 S = imstack(S, K);
 S = imstack(S, L);
 fprintf('imStack dimensions: (%s)\n', num2str(size(S)))
-for i = 1:size(S, 3)
-  imagesc(S(:, :, i)); pause
+
+stacksize = size(S, 3);
+imsize = ceil(sqrt(stacksize));
+
+figure
+for i = 1:stacksize
+  subplot(imsize, imsize, i);
+  imagesc(S(:, :, i));
 end
-close
+saveas(figure, 'images/imstack.png')
+pause; close
 
 % Generate textons
 % This texton matrix should have the dimensions of (k, d), where k is the
@@ -44,24 +50,28 @@ fprintf('textons dimensions: (%s)\n', num2str(size(T)))
 % Now for the experiments...
 [colorLabelIm, textureLabelIm] = ...
   compareSegmentations(I, F, T, winSize, numColorRegions, numTextureRegions);
-imagesc(colorLabelIm); pause
-imagesc(textureLabelIm); pause
-close
+figure
+subplot(1, 2, 1); imagesc(colorLabelIm);
+subplot(1, 2, 2); imagesc(textureLabelIm); 
+pause; close
 
 [colorLabelIm, textureLabelIm] = ...
   compareSegmentations(J, F, T, winSize, numColorRegions, numTextureRegions);
-imagesc(colorLabelIm); pause
-imagesc(textureLabelIm); pause
-close
+figure
+subplot(1, 2, 1); imagesc(colorLabelIm);
+subplot(1, 2, 2); imagesc(textureLabelIm); 
+pause; close
 
 [colorLabelIm, textureLabelIm] = ...
   compareSegmentations(K, F, T, winSize, numColorRegions, numTextureRegions);
-imagesc(colorLabelIm); pause
-imagesc(textureLabelIm); pause
-close
+figure
+subplot(1, 2, 1); imagesc(colorLabelIm);
+subplot(1, 2, 2); imagesc(textureLabelIm); 
+pause; close
 
 [colorLabelIm, textureLabelIm] = ...
   compareSegmentations(L, F, T, winSize, numColorRegions, numTextureRegions);
-imagesc(colorLabelIm); pause
-imagesc(textureLabelIm); pause
-close
+figure
+subplot(1, 2, 1); imagesc(colorLabelIm);
+subplot(1, 2, 2); imagesc(textureLabelIm); 
+pause; close
