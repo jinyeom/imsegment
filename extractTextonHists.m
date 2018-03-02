@@ -27,7 +27,16 @@ function [featIm] = extractTextonHists(origIm, bank, textons, winSize)
       winc = max([1 j - r]):min([j + r w]);
       W = L(winr, winc); % window of labels (1 to k)
       W = reshape(W, size(winr, 2) * size(winc, 2), 1);
-      featIm(i, j, :) = hist(W, k);
+      
+      % Get histogram for texton distribution around the current pixel.
+      % Normalize it to min and max of the distribution.
+      H = hist(W, k);
+      minh = min(H);
+      maxh = max(H);
+      if minh == maxh
+        H = (H - minh) ./ (maxh - minh);
+      end
+      featIm(i, j, :) = H;
     end
   end
 return

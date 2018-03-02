@@ -8,7 +8,7 @@ K = im2double(imread('images/snake.jpg'));
 L = im2double(imread('images/car.jpg'));
 
 % Parameters to be tuned.
-k = 6;
+k = 8;
 
 % Load the filter bank.
 load('data/filterBank.mat', 'F');
@@ -43,7 +43,7 @@ T = createTextons(S, F, k);
 fprintf('textons dimensions: (%s)\n', num2str(size(T)))
 
 % Now for the experiments...
-[colorLabelIm, textureLabelIm] = compareSegmentations(I, F, T, 65, 6, 6);
+[colorLabelIm, textureLabelIm] = compareSegmentations(I, F, T, 35, 6, 6);
 figure;
 title('Gumballs (color vs texture)')
 subplot(1, 2, 1); imagesc(colorLabelIm);
@@ -51,7 +51,7 @@ subplot(1, 2, 2); imagesc(textureLabelIm);
 print('images/gumballs_results.png', '-dpng', '-r0');
 disp('Gumballs figure saved.')
 
-[colorLabelIm, textureLabelIm] = compareSegmentations(J, F, T, 45, 6, 6);
+[colorLabelIm, textureLabelIm] = compareSegmentations(J, F, T, 35, 6, 6);
 figure;
 title('Twins (color vs texture)')
 subplot(1, 2, 1); imagesc(colorLabelIm);
@@ -59,7 +59,7 @@ subplot(1, 2, 2); imagesc(textureLabelIm);
 print('images/twins_results.png', '-dpng', '-r0');
 disp('Twins figure saved.')
 
-[colorLabelIm, textureLabelIm] = compareSegmentations(K, F, T, 45, 3, 3);
+[colorLabelIm, textureLabelIm] = compareSegmentations(K, F, T, 35, 6, 6);
 figure;
 title('Snake (color vs texture)')
 subplot(1, 2, 1); imagesc(colorLabelIm);
@@ -67,7 +67,7 @@ subplot(1, 2, 2); imagesc(textureLabelIm);
 print('images/snake_results.png', '-dpng', '-r0');
 disp('Snake figure saved.')
 
-[colorLabelIm, textureLabelIm] = compareSegmentations(L, F, T, 45, 6, 6);
+[colorLabelIm, textureLabelIm] = compareSegmentations(L, F, T, 35, 6, 6);
 figure;
 title('Car (color vs texture)')
 subplot(1, 2, 1); imagesc(colorLabelIm);
