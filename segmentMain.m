@@ -32,7 +32,7 @@ for i = 1:stacksize
   subplot(imsize, imsize, i);
   imagesc(S(:, :, i));
 end
-print('images/imstack.png', '-dpng', '-r0')
+print('images/imstack.pdf', '-dpdf', '-fillpage')
 
 % Generate textons
 % This texton matrix should have the dimensions of (k, d), where k is the
@@ -48,7 +48,7 @@ figure;
 title('Gumballs (color vs texture)')
 subplot(1, 2, 1); imagesc(colorLabelIm);
 subplot(1, 2, 2); imagesc(textureLabelIm); 
-print('images/gumballs_results.png', '-dpng', '-r0');
+print('images/gumballs_results.pdf', '-dpdf', '-fillpage');
 disp('Gumballs figure saved.')
 
 [colorLabelIm, textureLabelIm] = compareSegmentations(J, F, T, 35, 6, 6);
@@ -56,7 +56,7 @@ figure;
 title('Twins (color vs texture)')
 subplot(1, 2, 1); imagesc(colorLabelIm);
 subplot(1, 2, 2); imagesc(textureLabelIm); 
-print('images/twins_results.png', '-dpng', '-r0');
+print('images/twins_results.pdf', '-dpdf', '-fillpage');
 disp('Twins figure saved.')
 
 [colorLabelIm, textureLabelIm] = compareSegmentations(K, F, T, 35, 6, 6);
@@ -64,7 +64,7 @@ figure;
 title('Snake (color vs texture)')
 subplot(1, 2, 1); imagesc(colorLabelIm);
 subplot(1, 2, 2); imagesc(textureLabelIm); 
-print('images/snake_results.png', '-dpng', '-r0');
+print('images/snake_results.pdf', '-dpdf', '-fillpage');
 disp('Snake figure saved.')
 
 [colorLabelIm, textureLabelIm] = compareSegmentations(L, F, T, 35, 6, 6);
@@ -72,5 +72,5 @@ figure;
 title('Car (color vs texture)')
 subplot(1, 2, 1); imagesc(colorLabelIm);
 subplot(1, 2, 2); imagesc(textureLabelIm); 
-print('images/car_results.png', '-dpng', '-r0');
+print('images/car_results.pdf', '-dpdf', '-fillpage');
 disp('Car figure saved.')
