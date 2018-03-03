@@ -28,6 +28,7 @@ stacksize = size(S, 3);
 imsize = ceil(sqrt(stacksize));
 
 figure;
+axis off;
 for i = 1:stacksize
   subplot(imsize, imsize, i);
   imagesc(S(:, :, i));
@@ -45,6 +46,7 @@ fprintf('textons dimensions: (%s)\n', num2str(size(T)))
 % Now for the experiments...
 [colorLabelIm, textureLabelIm] = compareSegmentations(I, F, T, 35, 6, 6);
 figure;
+axis off;
 title('Gumballs (color vs texture)')
 subplot(1, 2, 1); imagesc(colorLabelIm);
 subplot(1, 2, 2); imagesc(textureLabelIm); 
@@ -53,6 +55,7 @@ disp('Gumballs figure saved.')
 
 [colorLabelIm, textureLabelIm] = compareSegmentations(J, F, T, 35, 6, 6);
 figure;
+axis off;
 title('Twins (color vs texture)')
 subplot(1, 2, 1); imagesc(colorLabelIm);
 subplot(1, 2, 2); imagesc(textureLabelIm); 
@@ -61,6 +64,7 @@ disp('Twins figure saved.')
 
 [colorLabelIm, textureLabelIm] = compareSegmentations(K, F, T, 35, 6, 6);
 figure;
+axis off;
 title('Snake (color vs texture)')
 subplot(1, 2, 1); imagesc(colorLabelIm);
 subplot(1, 2, 2); imagesc(textureLabelIm); 
@@ -69,6 +73,7 @@ disp('Snake figure saved.')
 
 [colorLabelIm, textureLabelIm] = compareSegmentations(L, F, T, 35, 6, 6);
 figure;
+axis off;
 title('Car (color vs texture)')
 subplot(1, 2, 1); imagesc(colorLabelIm);
 subplot(1, 2, 2); imagesc(textureLabelIm); 
