@@ -15,4 +15,3 @@ function displayFilterBank(F)
     subplot(gridSize, gridSize, i);
     imagesc(F(:,:,i));
   end
-  print('images/filters.pdf', '-dpdf', '-fillpage')
