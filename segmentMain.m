@@ -71,9 +71,9 @@ disp('Car figure saved.')
 disp('Comparing window sizes...')
 win1 = 5; % smaller window size
 win2 = 65; % larger window size
-[~, textureSmallWin] = compareSegmentations(J, F, T, win1, 6, 6);
-[~, textureLargeWin] = compareSegmentations(J, F, T, win2, 6, 6);
+[~, textureSmallWin] = compareSegmentations(I, F, T, win1, 6, 6);
+[~, textureLargeWin] = compareSegmentations(I, F, T, win2, 6, 6);
 figure;
-imagesc(textureSmallWin); print('images/twins_small_win.png', '-dpng', '-r0');
-imagesc(textureLargeWin); print('images/twins_large_win.png', '-dpng', '-r0');
+imagesc(textureSmallWin); print('images/gumballs_small.png', '-dpng', '-r0');
+imagesc(textureLargeWin); print('images/gumballs_large.png', '-dpng', '-r0');
 disp('done.')
