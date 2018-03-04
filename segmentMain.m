@@ -11,7 +11,10 @@ K = im2double(imread('images/snake.jpg'));
 L = im2double(imread('images/car.jpg'));
 
 % Parameters to be tuned.
-k = 8;
+k = 14;
+winSize = 35;
+numColorRegions = 12;
+numTextureRegions = 12;
 
 % Load the filter bank.
 load('data/filterBank.mat', 'F');
@@ -55,28 +58,32 @@ T2 = createTextons(S, F2, k);
 fprintf('textons subset dimensions: (%s)\n', num2str(size(T2)))
 
 % Now for the experiments...
-[colorLabelIm, textureLabelIm] = compareSegmentations(I, F, T, 35, 6, 6);
+[colorLabelIm, textureLabelIm] = compareSegmentations(I, F, T, winSize, ...
+  numColorRegions, numTextureRegions);
 figure;
 imagesc(colorLabelIm); print('images/gumballs_color.png', '-dpng', '-r0');
 imagesc(textureLabelIm); print('images/gumballs_texture.png', '-dpng', '-r0');
 disp('Gumballs figure saved.')
 close
 
-[colorLabelIm, textureLabelIm] = compareSegmentations(J, F, T, 35, 6, 6);
+[colorLabelIm, textureLabelIm] = compareSegmentations(J, F, T, winSize, ...
+  numColorRegions, numTextureRegions);
 figure;
 imagesc(colorLabelIm); print('images/twins_color.png', '-dpng', '-r0');
 imagesc(textureLabelIm); print('images/twins_texture.png', '-dpng', '-r0');
 disp('Twins figure saved.')
 close
 
-[colorLabelIm, textureLabelIm] = compareSegmentations(K, F, T, 35, 6, 6);
+[colorLabelIm, textureLabelIm] = compareSegmentations(K, F, T, winSize, ...
+  numColorRegions, numTextureRegions);
 figure;
 imagesc(colorLabelIm); print('images/snake_color.png', '-dpng', '-r0');
 imagesc(textureLabelIm); print('images/snake_texture.png', '-dpng', '-r0');
 disp('Snake figure saved.')
 close
 
-[colorLabelIm, textureLabelIm] = compareSegmentations(L, F, T, 35, 6, 6);
+[colorLabelIm, textureLabelIm] = compareSegmentations(L, F, T, winSize, ...
+  numColorRegions, numTextureRegions);
 figure;
 imagesc(colorLabelIm); print('images/car_color.png', '-dpng', '-r0');
 imagesc(textureLabelIm); print('images/car_texture.png', '-dpng', '-r0');
@@ -86,27 +93,23 @@ close
 disp('Comparing window sizes...')
 win1 = 5; % smaller window size
 win2 = 65; % larger window size
-[~, textureSmallWin] = compareSegmentations(I, F, T, win1, 6, 6);
-[~, textureLargeWin] = compareSegmentations(I, F, T, win2, 6, 6);
+[~, textureLabelIm] = compareSegmentations(I, F, T, win1, ...
+  numColorRegions, numTextureRegions);
+[~, textureLabelIm] = compareSegmentations(I, F, T, win2, ...
+  numColorRegions, numTextureRegions);
 figure;
 imagesc(textureSmallWin); print('images/gumballs_small.png', '-dpng', '-r0');
 imagesc(textureLargeWin); print('images/gumballs_large.png', '-dpng', '-r0');
 disp('done.')
 close
 
-disp('Comparing different sets of filters for gumballs...')
+disp('Comparing different sets of filters...')
 figure;
-[~, textureFullset] = compareSegmentations(I, F, T, 35, 6, 6);
-[~, textureSubset] = compareSegmentations(I, F2, T2, 35, 6, 6);
+[colorLabelIm, textureLabelIm] = compareSegmentations(I, F, T, winSize, ...
+  numColorRegions, numTextureRegions);
+[colorLabelIm, textureLabelIm] = compareSegmentations(I, F2, T2, winSize, ...
+  numColorRegions, numTextureRegions);
 imagesc(textureFullset); print('images/gumballs_fullset.png', '-dpng', '-r0');
 imagesc(textureSubset); print('images/gumballs_subset.png', '-dpng', '-r0');
 close
 
-disp('Comparing different sets of filters for car...')
-figure;
-[~, textureFullset] = compareSegmentations(L, F, T, 35, 6, 6);
-[~, textureSubset] = compareSegmentations(L, F2, T2, 35, 6, 6);
-imagesc(textureFullset); print('images/car_fullset.png', '-dpng', '-r0');
-imagesc(textureSubset); print('images/car_subset.png', '-dpng', '-r0');
-disp('done.')
-close
