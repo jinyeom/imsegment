@@ -77,3 +77,14 @@ figure;
 imagesc(textureSmallWin); print('images/gumballs_small.png', '-dpng', '-r0');
 imagesc(textureLargeWin); print('images/gumballs_large.png', '-dpng', '-r0');
 disp('done.')
+
+disp('Comparing different sets of filters...')
+F2 = F(:, :, 1:18); % only use the first 18 filters (thin edge detectors).
+T2 = createTextons(S, F2, k);
+[~, textureFullset] = compareSegmentations(L, F, T, 35, 6, 6);
+[~, textureSubset] = compareSegmentations(L, F2, T2, 35, 6, 6);
+figure;
+imagesc(textureFullset); print('images/car_fullset.png', '-dpng', '-r0');
+imagesc(textureSubset); print('images/car_subset.png', '-dpng', '-r0');
+disp('done.')
+
