@@ -1,6 +1,9 @@
 % k-means segmentation experiments
 % Author: Jin Yeom (jinyeom@utexas.edu)
 
+% Seed the random number generator with 42.
+rng(42);
+
 % Test images.
 I = im2double(imread('images/gumballs.jpg'));
 J = im2double(imread('images/twins.jpg'));
@@ -43,30 +46,42 @@ print('images/imstack.png', '-dpng', '-r0'); close
 T = createTextons(S, F, k);
 fprintf('textons dimensions: (%s)\n', num2str(size(T)))
 
+% Generate second textons with a subset of the filter bank with only thin edge
+% detectors (the first 18).
+F2 = F(:, :, 1:18);
+displayFilterBank(F2)
+print('images/filters_subset.png', '-dpng', '-r0'); close
+T2 = createTextons(S, F2, k);
+fprintf('textons subset dimensions: (%s)\n', num2str(size(T2)))
+
 % Now for the experiments...
 [colorLabelIm, textureLabelIm] = compareSegmentations(I, F, T, 35, 6, 6);
 figure;
 imagesc(colorLabelIm); print('images/gumballs_color.png', '-dpng', '-r0');
 imagesc(textureLabelIm); print('images/gumballs_texture.png', '-dpng', '-r0');
 disp('Gumballs figure saved.')
+close
 
 [colorLabelIm, textureLabelIm] = compareSegmentations(J, F, T, 35, 6, 6);
 figure;
 imagesc(colorLabelIm); print('images/twins_color.png', '-dpng', '-r0');
 imagesc(textureLabelIm); print('images/twins_texture.png', '-dpng', '-r0');
 disp('Twins figure saved.')
+close
 
 [colorLabelIm, textureLabelIm] = compareSegmentations(K, F, T, 35, 6, 6);
 figure;
 imagesc(colorLabelIm); print('images/snake_color.png', '-dpng', '-r0');
 imagesc(textureLabelIm); print('images/snake_texture.png', '-dpng', '-r0');
 disp('Snake figure saved.')
+close
 
 [colorLabelIm, textureLabelIm] = compareSegmentations(L, F, T, 35, 6, 6);
 figure;
 imagesc(colorLabelIm); print('images/car_color.png', '-dpng', '-r0');
 imagesc(textureLabelIm); print('images/car_texture.png', '-dpng', '-r0');
 disp('Car figure saved.')
+close
 
 disp('Comparing window sizes...')
 win1 = 5; % smaller window size
@@ -77,14 +92,13 @@ figure;
 imagesc(textureSmallWin); print('images/gumballs_small.png', '-dpng', '-r0');
 imagesc(textureLargeWin); print('images/gumballs_large.png', '-dpng', '-r0');
 disp('done.')
+close
 
 disp('Comparing different sets of filters...')
-F2 = F(:, :, 1:18); % only use the first 18 filters (thin edge detectors).
-T2 = createTextons(S, F2, k);
 figure;
 [~, textureFullset] = compareSegmentations(I, F, T, 35, 6, 6);
 [~, textureSubset] = compareSegmentations(I, F2, T2, 35, 6, 6);
 imagesc(textureFullset); print('images/gumballs_fullset.png', '-dpng', '-r0');
 imagesc(textureSubset); print('images/gumballs_subset.png', '-dpng', '-r0');
 disp('done.')
-
+close
