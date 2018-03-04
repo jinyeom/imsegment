@@ -14,7 +14,7 @@ k = 8;
 load('data/filterBank.mat', 'F');
 fprintf('filterBank dimensions: (%s)\n', num2str(size(F)))
 displayFilterBank(F)
-print('images/filters.png', '-dpng', '-r0');
+print('images/filters.png', '-dpng', '-r0'); close
 
 % Create a stack of images for creating textons.
 % This image stack consists of the test images above in grayscale, with the
@@ -33,8 +33,7 @@ for i = 1:stacksize
   subplot(imsize, imsize, i);
   imagesc(S(:, :, i));
 end
-print('images/imstack.png', '-dpng', '-r0');
-close
+print('images/imstack.png', '-dpng', '-r0'); close
 
 % Generate textons
 % This texton matrix should have the dimensions of (k, d), where k is the
@@ -82,6 +81,7 @@ disp('done.')
 disp('Comparing different sets of filters...')
 F2 = F(:, :, 1:18); % only use the first 18 filters (thin edge detectors).
 T2 = createTextons(S, F2, k);
+figure;
 [~, textureFullset] = compareSegmentations(I, F, T, 35, 6, 6);
 [~, textureSubset] = compareSegmentations(I, F2, T2, 35, 6, 6);
 imagesc(textureFullset); print('images/gumballs_fullset.png', '-dpng', '-r0');
