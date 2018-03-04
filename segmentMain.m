@@ -48,7 +48,7 @@ fprintf('textons dimensions: (%s)\n', num2str(size(T)))
 
 % Generate second textons with a subset of the filter bank with only thin edge
 % detectors (the first 18).
-F2 = F(:, :, 1:18);
+F2 = cat(3, F(:, :, 1:6), F(:, :, 19:24));
 displayFilterBank(F2)
 print('images/filters_subset.png', '-dpng', '-r0'); close
 T2 = createTextons(S, F2, k);
