@@ -13,7 +13,7 @@ L = im2double(imread('images/car.jpg'));
 % Parameters to be tuned.
 k = 14;
 winSize = 35;
-numColorRegions = 12;
+numColorRegions = 4;
 numTextureRegions = 12;
 
 % Load the filter bank.
@@ -93,9 +93,9 @@ close
 disp('Comparing window sizes...')
 win1 = 5; % smaller window size
 win2 = 65; % larger window size
-[~, textureLabelIm] = compareSegmentations(I, F, T, win1, ...
+[~, textureSmallWin] = compareSegmentations(I, F, T, win1, ...
   numColorRegions, numTextureRegions);
-[~, textureLabelIm] = compareSegmentations(I, F, T, win2, ...
+[~, textureLargeWin] = compareSegmentations(I, F, T, win2, ...
   numColorRegions, numTextureRegions);
 figure;
 imagesc(textureSmallWin); print('images/gumballs_small.png', '-dpng', '-r0');
@@ -105,9 +105,9 @@ close
 
 disp('Comparing different sets of filters...')
 figure;
-[colorLabelIm, textureLabelIm] = compareSegmentations(I, F, T, winSize, ...
+[~, textureFullset] = compareSegmentations(I, F, T, winSize, ...
   numColorRegions, numTextureRegions);
-[colorLabelIm, textureLabelIm] = compareSegmentations(I, F2, T2, winSize, ...
+[~, textureSubset] = compareSegmentations(I, F2, T2, winSize, ...
   numColorRegions, numTextureRegions);
 imagesc(textureFullset); print('images/gumballs_fullset.png', '-dpng', '-r0');
 imagesc(textureSubset); print('images/gumballs_subset.png', '-dpng', '-r0');
