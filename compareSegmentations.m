@@ -10,11 +10,13 @@ function [colorLabelIm, textureLabelIm] = compareSegmentations(origIm, ...
   npixel = h * w;
   
   % Color segmentation:
-  [~, meanFeats] = kmeans(reshape(origIm, npixel, c), numColorRegions);
+  I = reshape(origIm, npixel, c);
+  [~, meanFeats] = kmeans(I, numColorRegions, 'MaxIter', 1000);
   colorLabelIm = quantizeFeats(origIm, meanFeats);
   
   % Texture segmentation:
   featIm = extractTextonHists(rgb2gray(origIm), bank, textons, winSize);
-  [~, meanFeats] = kmeans(reshape(featIm, npixel, k), numTextureRegions);   
+  J = reshape(featIm, npixel, k);
+  [~, meanFeats] = kmeans(J, numTextureRegions, 'MaxIter', 1000);   
   textureLabelIm = quantizeFeats(featIm, meanFeats);
 return
