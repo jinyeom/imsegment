@@ -94,11 +94,19 @@ imagesc(textureLargeWin); print('images/gumballs_large.png', '-dpng', '-r0');
 disp('done.')
 close
 
-disp('Comparing different sets of filters...')
+disp('Comparing different sets of filters for gumballs...')
 figure;
 [~, textureFullset] = compareSegmentations(I, F, T, 35, 6, 6);
 [~, textureSubset] = compareSegmentations(I, F2, T2, 35, 6, 6);
 imagesc(textureFullset); print('images/gumballs_fullset.png', '-dpng', '-r0');
 imagesc(textureSubset); print('images/gumballs_subset.png', '-dpng', '-r0');
+close
+
+disp('Comparing different sets of filters for car...')
+figure;
+[~, textureFullset] = compareSegmentations(L, F, T, 35, 6, 6);
+[~, textureSubset] = compareSegmentations(L, F2, T2, 35, 6, 6);
+imagesc(textureFullset); print('images/car_fullset.png', '-dpng', '-r0');
+imagesc(textureSubset); print('images/car_subset.png', '-dpng', '-r0');
 disp('done.')
 close
