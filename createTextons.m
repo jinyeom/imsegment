@@ -20,6 +20,6 @@ function [textons] = createTextons(imStack, bank, k)
   % Sample a subset, in order to reduce complexity.
   samplesize = int32(npixel * 0.7);
   S = R(randperm(npixel, samplesize), :); 
-  [idx, C] = kmeans(S, k);
+  [idx, C] = kmeans(S, k, 'MaxIter', 1000);
   textons = C;
 return
