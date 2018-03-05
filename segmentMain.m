@@ -11,8 +11,8 @@ K = im2double(imread('images/snake.jpg'));
 L = im2double(imread('images/car.jpg'));
 
 % Parameters to be tuned.
-k = 14;
-winSize = 55;
+k = 12; % determines the number of bins for histogram
+winSize = 105;
 numColorRegions = 4;
 numTextureRegions = 10;
 
@@ -35,6 +35,7 @@ stacksize = size(S, 3);
 imsize = ceil(sqrt(stacksize));
 
 figure;
+colormap cool;
 for i = 1:stacksize
   subplot(imsize, imsize, i);
   imagesc(S(:, :, i));
@@ -61,6 +62,7 @@ fprintf('textons subset dimensions: (%s)\n', num2str(size(T2)))
 [colorLabelIm, textureLabelIm] = compareSegmentations(I, F, T, winSize, ...
   numColorRegions, numTextureRegions);
 figure;
+colormap hsv;
 imagesc(colorLabelIm); print('images/gumballs_color.png', '-dpng', '-r0');
 imagesc(textureLabelIm); print('images/gumballs_texture.png', '-dpng', '-r0');
 disp('Gumballs figure saved.')
@@ -69,6 +71,7 @@ close
 [colorLabelIm, textureLabelIm] = compareSegmentations(J, F, T, winSize, ...
   numColorRegions, numTextureRegions);
 figure;
+colormap hsv;
 imagesc(colorLabelIm); print('images/twins_color.png', '-dpng', '-r0');
 imagesc(textureLabelIm); print('images/twins_texture.png', '-dpng', '-r0');
 disp('Twins figure saved.')
@@ -77,6 +80,7 @@ close
 [colorLabelIm, textureLabelIm] = compareSegmentations(K, F, T, winSize, ...
   numColorRegions, numTextureRegions);
 figure;
+colormap hsv;
 imagesc(colorLabelIm); print('images/snake_color.png', '-dpng', '-r0');
 imagesc(textureLabelIm); print('images/snake_texture.png', '-dpng', '-r0');
 disp('Snake figure saved.')
@@ -85,6 +89,7 @@ close
 [colorLabelIm, textureLabelIm] = compareSegmentations(L, F, T, winSize, ...
   numColorRegions, numTextureRegions);
 figure;
+colormap hsv;
 imagesc(colorLabelIm); print('images/car_color.png', '-dpng', '-r0');
 imagesc(textureLabelIm); print('images/car_texture.png', '-dpng', '-r0');
 disp('Car figure saved.')
@@ -98,6 +103,7 @@ win2 = 65; % larger window size
 [~, textureLargeWin] = compareSegmentations(I, F, T, win2, ...
   numColorRegions, numTextureRegions);
 figure;
+colormap hsv;
 imagesc(textureSmallWin); print('images/gumballs_small.png', '-dpng', '-r0');
 imagesc(textureLargeWin); print('images/gumballs_large.png', '-dpng', '-r0');
 disp('done.')
@@ -109,6 +115,8 @@ figure;
   numColorRegions, numTextureRegions);
 [~, textureSubset] = compareSegmentations(I, F2, T2, winSize, ...
   numColorRegions, numTextureRegions);
+figure;
+colormap hsv;
 imagesc(textureFullset); print('images/gumballs_fullset.png', '-dpng', '-r0');
 imagesc(textureSubset); print('images/gumballs_subset.png', '-dpng', '-r0');
 close
