@@ -12,9 +12,9 @@ L = im2double(imread('images/car.jpg'));
 
 % Parameters to be tuned.
 k = 12; % determines the number of bins for histogram
-winSize = 105;
+winSize = 65;
 numColorRegions = 4;
-numTextureRegions = 10;
+numTextureRegions = 8;
 
 % Load the filter bank.
 load('data/filterBank.mat', 'F');
@@ -119,5 +119,6 @@ figure;
 colormap hsv;
 imagesc(textureFullset); print('images/gumballs_fullset.png', '-dpng', '-r0');
 imagesc(textureSubset); print('images/gumballs_subset.png', '-dpng', '-r0');
+disp('done.')
 close
 
