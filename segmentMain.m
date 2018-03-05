@@ -12,7 +12,7 @@ L = im2double(imread('images/car.jpg'));
 
 % Parameters to be tuned.
 k = 14;
-winSize = 35;
+winSize = 55;
 numColorRegions = 4;
 numTextureRegions = 12;
 
