@@ -1,8 +1,8 @@
 % k-means segmentation experiments
 % Author: Jin Yeom (jinyeom@utexas.edu)
 
-% Seed the random number generator with 42.
-rng(42);
+% Seed the random number generator with 1.
+rng(1);
 
 % Test images.
 I = im2double(imread('images/gumballs.jpg'));
@@ -96,8 +96,8 @@ disp('Car figure saved.')
 close
 
 disp('Comparing window sizes...')
-win1 = 5; % smaller window size
-win2 = 65; % larger window size
+win1 = 25; % smaller window size
+win2 = 85; % larger window size
 [~, textureSmallWin] = compareSegmentations(I, F, T, win1, ...
   numColorRegions, numTextureRegions);
 [~, textureLargeWin] = compareSegmentations(I, F, T, win2, ...
