@@ -14,7 +14,7 @@ L = im2double(imread('images/car.jpg'));
 k = 14;
 winSize = 55;
 numColorRegions = 4;
-numTextureRegions = 12;
+numTextureRegions = 10;
 
 % Load the filter bank.
 load('data/filterBank.mat', 'F');
