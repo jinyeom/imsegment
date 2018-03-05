@@ -13,7 +13,7 @@ L = im2double(imread('images/car.jpg'));
 % Parameters to be tuned.
 k = 10; % determines the number of bins for histogram
 winSize = 65;
-numColorRegions = 4;
+numColorRegions = 6;
 numTextureRegions = 8;
 
 % Load the filter bank.
